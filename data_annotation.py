@@ -1,22 +1,32 @@
 from ultralytics import SAM
-import cv2
 
 model = SAM('sam2_t.pt')
 model.info()
 
-# input_image = "./dataset/video/00000.jpg"
-# , points=[[388, 324], [232, 543], [378, 763], [607, 619], [786, 462], [958, 253], [1175, 390], [1248, 470], [1414, 871], [1152, 724], [347, 526], [551, 719], [874, 666], [890, 382], [1013, 483], [1104, 327], [1293, 414], [1333, 472], [1591, 639], [1172, 752], [1915, 400], [1875, 846], [788, 390], [315, 241]]
-results = model("./dataset/video.mp4", stream=True)
+'''
+Data annotation process is done by using SAM2 and PolygonZone
+You should annotate data by following class: 'goalkeeper', 'player', 'referee' and 'ball'
+Edit 'input_image', 'points' parameter accordingly and run this code each time you annotate data
+'''
+
+input_image = "./dataset/images/val/00004.jpg"
+results = model(input_image,
+    points=[[560, 434], [588, 564], [924, 348], [990, 528], [1031, 439], [1073, 319], [1117, 462], [1160, 518], [1314, 496], [1323, 366], [1223, 271], [1846, 462], [1811, 610], [1269, 850], [444, 485], [1572, 487], [1367, 147], [1130, 680]])
 results[0].show()
-# results[0].show()
-# for i, res in enumerate(results):
-#     normalized_boxes = res.boxes.xywhn
-#     with open(input_image.replace(".jpg", ".txt"), "w", encoding="UTF-8") as f:
-#         j = 0
-#         for nbox in normalized_boxes:
-#             x, y, w, h = nbox
-#             if j<10:
-#                 f.write("0 {} {} {} {}".format(x, y, w, h) + '\n')
-#             elif j<21:
-#
-#             print(nbox)
+for i, res in enumerate(results):
+    normalized_boxes = res.boxes.xywhn
+    with open(input_image.replace(".jpg", ".txt"), "w", encoding="UTF-8") as f:
+        j = 0
+        for nbox in normalized_boxes:
+            x, y, w, h = nbox
+
+            #Change j accordingly to the frame to annotate the class correctly
+            if j<14:
+                f.write("2 {} {} {} {}".format(x, y, w, h) + '\n')
+            elif j<15:
+                f.write("1 {} {} {} {}".format(x, y, w, h) + '\n')
+            elif j<17:
+                f.write("3 {} {} {} {}".format(x, y, w, h) + '\n')
+            else:
+                f.write("0 {} {} {} {}".format(x, y, w, h) + '\n')
+            j+=1
