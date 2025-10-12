@@ -18,12 +18,14 @@ As seen in the video, there are some drawbacks. At some point the shoe is detect
 
 ### Running the Analysis
 
-The primary entry point for the analysis is `main.py`. It is designed to process an input video file and produce an annotated output video with all the derived analytics overlaid.
+To run the analysis, you need to run main.py file by writing the follow bash to the terminal
 
 ```bash
-python main.py
+python main.py -i <YOUR_VIDEO> -o <OUTPUT>
 ```
-*(Note: You will need to configure the input and output video paths within `main.py`.)*
+where:
+* `-i` or `--input` is the path to the input video
+* `-o` or `--output` is the path to the output video
 
 ## Environment
 * OpenCV 4.12
