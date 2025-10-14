@@ -5,7 +5,10 @@ This project is a football analytic system that utilizes YOLOv5 and ByteTrack mo
 ## Demo
 
 
-https://github.com/user-attachments/assets/b1c7e68c-e804-4738-88e2-f59b94fecfa1
+https://github.com/user-attachments/assets/81eb4159-4ed8-48e8-b756-0596cb276a40
+
+
+
 
 As seen in the video, there are some drawbacks. At some point the shoe is detected as a ball, and too many missing detections result in the interpolation process being incorrect. On the other hand, the tracking process also not being accurate results in the model generating many different track IDs for the same player. I am working on this problem at the moment, and it will be fixed in the next update.
 ## Key Features
